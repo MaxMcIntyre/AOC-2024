@@ -1,3 +1,5 @@
+from collections import Counter
+
 left_list = []
 right_list = []
 
@@ -7,11 +9,10 @@ with open('part1.txt') as file:
         left_list.append(int(nums[0]))
         right_list.append(int(nums[1]))
 
-left_list.sort()
-right_list.sort()
-
 res = 0
-for i in range(len(left_list)):
-    res += abs(left_list[i] - right_list[i])
+right_list_occurrences = Counter(right_list)
+
+for num in left_list:
+    res += num * right_list_occurrences.get(num, 0)
 
 print(res)
