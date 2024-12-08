@@ -1,4 +1,4 @@
-with open('input.txt') as file:
+with open('input-example.txt') as file:
     data = file.readlines()
 
 grid = [list(line.strip()) for line in data]
@@ -20,7 +20,7 @@ def get_move(x, y, directions_index):
     dx, dy = directions[directions_index]
     nx, ny = x + dx, y + dy
 
-    if not (0 <= nx < len(grid) and 0 <= ny < len(grid[0])) or grid[nx][ny] not in ["#","O"]:
+    if not (0 <= nx < len(grid) and 0 <= ny < len(grid[0])) or grid[nx][ny] != "#":
         return nx, ny, directions_index
     else:
         directions_index = (directions_index + 1) % len(directions)
@@ -28,11 +28,10 @@ def get_move(x, y, directions_index):
 
 for i in range(len(grid)):
     for j in range(len(grid[0])):
-        if grid[i][j] == ".":
-            grid[i][j] = "O"
+        if grid[i][j] == "." and not (i == start_x and j == start_y):
+            grid[i][j] = "#"
         
             x, y = start_x, start_y
-            loop_caused = False
 
             slow_x, slow_y, slow_directions_index = start_x, start_y, 0
             fast_x, fast_y, fast_directions_index  = get_move(slow_x, slow_y, slow_directions_index)
