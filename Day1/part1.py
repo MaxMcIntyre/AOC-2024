@@ -1,7 +1,7 @@
 left_list = []
 right_list = []
 
-with open('part1.txt') as file:
+with open('input.txt') as file:
     for line in file:
         nums = line.split("   ")
         left_list.append(int(nums[0]))
