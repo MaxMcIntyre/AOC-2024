@@ -37,8 +37,6 @@ for update in updates:
                 in_degree[neighbour] -= 1
     
     if not queue:
-        print(update_list)
         res += int(update_list[len(update_list) // 2])
-        print('Update ', update_list, 'works')
     
     print(res)
