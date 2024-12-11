@@ -16,7 +16,7 @@ res = 0
 
 for update in updates:
     update_list = update.split(",")
-    update_nodes = set([node for node in update_list])
+    update_nodes = set(update_list)
     in_degree = {node: 0 for node in update_nodes}
 
     for node in update_nodes:
@@ -41,4 +41,4 @@ for update in updates:
     if topo_order != update_list:
         res += int(topo_order[len(topo_order) // 2])
     
-    print(res)
+print(res)
