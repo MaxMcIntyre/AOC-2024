@@ -7,11 +7,9 @@ moves = list(filter(lambda x: x != "\n", moves))
 
 grid = []
 grid_row = []
-
 for i in range(len(grid_data)):
     if grid_data[i] == "." or grid_data[i] == "#":
-        grid_row.append(grid_data[i])
-        grid_row.append(grid_data[i])
+        grid_row.extend([grid_data[i]] * 2)
     elif grid_data[i] == "@":
         grid_row.append("@")
         grid_row.append(".")
@@ -21,18 +19,16 @@ for i in range(len(grid_data)):
     elif grid_data[i] == "\n":
         grid.append(grid_row.copy())
         grid_row = []
-
 grid.append(grid_row.copy())
-
 
 curr_pos = (0, 0)
 for i in range(len(grid)):
     for j in range(len(grid[0])):
         if grid[i][j] == "@":
             curr_pos = i, j
-            grid[i][j] = "."
             break
     if grid[i][j] == "@":
+        grid[i][j] = "."
         break
 
 directions = {"^": (-1, 0), "v": (1, 0), "<": (0, -1), ">": (0, 1)}

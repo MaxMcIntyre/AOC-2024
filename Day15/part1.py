@@ -9,9 +9,9 @@ for i in range(len(grid)):
     for j in range(len(grid[0])):
         if grid[i][j] == "@":
             curr_pos = i, j
-            grid[i][j] = "."
             break
     if grid[i][j] == "@":
+        grid[i][j] = "."
         break
 
 directions = {"^": (-1, 0), "v": (1, 0), "<": (0, -1), ">": (0, 1)}

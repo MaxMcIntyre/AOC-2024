@@ -1,4 +1,4 @@
-with open('input-example.txt') as file:
+with open('input.txt') as file:
     data = file.readlines()
 
 grid = [list(line.strip()) for line in data]
@@ -8,9 +8,9 @@ for i in range(len(grid)):
     for j in range(len(grid[0])):
         if grid[i][j] == "^":
             start_x, start_y = i, j
-            grid[i][j] = "."
             break
     if grid[i][j] == "^":
+        grid[i][j] = "."
         break
 
 directions = [(-1,0),(0,1),(1,0),(0,-1)]
