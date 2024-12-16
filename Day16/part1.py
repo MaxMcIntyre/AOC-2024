@@ -15,7 +15,6 @@ for i in range(len(grid)):
 
 directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 pq = [(0, start_pos, 1)]
-#visited = set((start_pos[0], start_pos[1], 1))
 visited = set()
 optimal_cost = 0
 
