@@ -11,11 +11,9 @@ for i in range(len(grid_data)):
     if grid_data[i] == "." or grid_data[i] == "#":
         grid_row.extend([grid_data[i]] * 2)
     elif grid_data[i] == "@":
-        grid_row.append("@")
-        grid_row.append(".")
+        grid_row.extend(["@","."])
     elif grid_data[i] == "O":
-        grid_row.append("[")
-        grid_row.append("]")
+        grid_row.extend(["[", "]"])
     elif grid_data[i] == "\n":
         grid.append(grid_row.copy())
         grid_row = []
