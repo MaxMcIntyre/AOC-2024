@@ -14,15 +14,16 @@ for i in range(len(grid)):
         break
 
 directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-pq = [(0, start_pos, 1)]
+pq = [(0, (start_pos[0], start_pos[1], 1))]
 visited = set()
-optimal_cost = 0
+optimal_cost = float('inf')
 
 while pq:
-    cost, (x, y), direction = heapq.heappop(pq)
-    if (x, y, direction) in visited:
+    cost, curr = heapq.heappop(pq)
+    x, y, direction = curr
+    if curr in visited:
         continue
-    visited.add((x, y, direction))
+    visited.add(curr)
 
     if grid[x][y] == "E":
         optimal_cost = cost
@@ -31,16 +32,16 @@ while pq:
     dx, dy = directions[direction]
     nx, ny = x + dx, y + dy
     if grid[nx][ny] != "#":
-        heapq.heappush(pq, (cost + 1, (nx, ny), direction))
+        heapq.heappush(pq, (cost + 1, (nx, ny, direction)))
     
     direction_r = (direction + 1) % len(directions)
     dx_r, dy_r = directions[direction_r]
     if grid[x + dx_r][y + dy_r] != "#":
-        heapq.heappush(pq, (cost + 1000, (x, y), direction_r))
+        heapq.heappush(pq, (cost + 1000, (x, y, direction_r)))
     
     direction_l = (direction - 1) % len(directions)
     dx_l, dy_l = directions[direction_l]
     if grid[x + dx_l][y + dy_l] != "#":
-        heapq.heappush(pq, (cost + 1000, (x, y), direction_l))
+        heapq.heappush(pq, (cost + 1000, (x, y, direction_l)))
 
 print(optimal_cost)

@@ -31,14 +31,14 @@ while pq:
     elif cost > optimal_cost:
         continue
 
-    dist[(x, y, direction)] = cost
+    dist[curr] = cost
     if prev:
         prevs[curr].append(prev)
 
     if grid[x][y] == "E":
         optimal_cost = cost
 
-        reachable = [(x, y, direction)]
+        reachable = [curr]
         while reachable:
             curr = reachable.pop()
             tiles_in_optimal.add((curr[0], curr[1]))
