@@ -20,12 +20,9 @@ def find_path(grid):
     
     curr = (70, 70)
     path = set()
-    if not prevs.get(curr):
-        return path
-    
     while curr:
         path.add(curr)
-        curr = prevs[curr]
+        curr = prevs.get(curr)
     return path
 
 if __name__ == "__main__":

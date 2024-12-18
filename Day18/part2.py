@@ -14,7 +14,7 @@ first_block_byte = (0, 0)
 
 while i < len(positions):
     path = find_path(grid)
-    if not len(path):
+    if not len(path) - 1:
         first_block_byte = positions[i]
         break
 
