@@ -4,7 +4,6 @@ with open('input.txt') as file:
     data = file.read()
 
 _, program_text = data.split("\n\n")
-registers = {"A": 0, "B": 0, "C": 0}
 program = list(map(int, program_text.split(": ")[1].split(",")))
 
 def backtrack(program, curr_index, curr_register_val):
