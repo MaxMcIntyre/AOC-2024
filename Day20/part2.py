@@ -30,14 +30,16 @@ while queue:
 
 res = 0
 corridor_positions = list(min_distance)
-for i in range(len(corridor_positions)):
-    for j in range(i+1, len(corridor_positions)):
-        x1, y1 = corridor_positions[i]
-        x2, y2 = corridor_positions[j]
-        manhattan_dist = abs(y2 - y1) + abs(x2 - x1) 
-        if manhattan_dist <= 20:
-            picoseconds_saved = abs(min_distance[(x2, y2)] - min_distance[(x1, y1)]) - manhattan_dist
-            if picoseconds_saved >= 100:
-                res += 1
+for x1 in range(len(grid)):
+    for y1 in range(len(grid[0])):
+        for x2 in range(max(0, x1 - 20), min(len(grid), x1 + 21)):
+            x_dist = abs(x2 - x1)
+            for y2 in range(max(0, y1 - (20 - x_dist)), min(len(grid[0]), y1 + (20 - x_dist) + 1)):
+                if (x1, y1) in min_distance and (x2, y2) in min_distance:
+                    y_dist = abs(y2 - y1)
+                    manhattan_dist = x_dist + y_dist
+                    picoseconds_saved = (min_distance[(x2, y2)] - min_distance[(x1, y1)]) - manhattan_dist
+                    if picoseconds_saved >= 100:
+                        res += 1
 
 print(res)
