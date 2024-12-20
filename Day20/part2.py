@@ -14,22 +14,19 @@ for i in range(len(grid)):
 
 directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 queue = deque([(end_pos, 0)])
-visited = set([end_pos])
-min_distance = dict()
+min_distance = {end_pos: 0}
 
 while queue:
     curr, dist = queue.popleft()
-    min_distance[curr] = dist
     x, y = curr
 
     for dx, dy in directions:
         nx, ny = x + dx, y + dy
-        if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]) and grid[nx][ny] != "#" and (nx, ny) not in visited:
+        if 0 <= nx < len(grid) and 0 <= ny < len(grid[0]) and grid[nx][ny] != "#" and (nx, ny) not in min_distance:
             queue.append(((nx, ny), dist + 1))
-            visited.add((nx, ny))
+            min_distance[(nx, ny)] = dist + 1
 
 res = 0
-corridor_positions = list(min_distance)
 for x1 in range(len(grid)):
     for y1 in range(len(grid[0])):
         for x2 in range(max(0, x1 - 20), min(len(grid), x1 + 21)):
