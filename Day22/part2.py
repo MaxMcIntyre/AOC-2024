@@ -3,8 +3,7 @@ from part1 import calculate_next_secret
 with open('input.txt') as file:
     secret_nums = list(map(int, file.read().split("\n")))
 
-all_sequence_prices = []
-all_sequences = set()
+all_sequence_prices = dict()
 
 for num in secret_nums:
     curr = num
@@ -18,21 +17,12 @@ for num in secret_nums:
     for i in range(1, len(last_digits)):
         price_differences.append(last_digits[i] - last_digits[i-1])
     
-    sequence_prices = dict()
+    sequences_seen = set()
     for i in range(len(price_differences) - 3):
         sequence = tuple(price_differences[i:i+4])
-        if sequence not in sequence_prices:
-            sequence_prices[sequence] = last_digits[i+4]
-            all_sequences.add(sequence)
-    
-    all_sequence_prices.append(sequence_prices.copy())
+        if sequence not in sequences_seen:
+            all_sequence_prices[sequence] = all_sequence_prices.get(sequence, 0) + last_digits[i+4]
+            sequences_seen.add(sequence)
 
-max_bananas = 0
-for sequence in all_sequences:
-    bananas = 0
-    for i in range(len(all_sequence_prices)):
-        if sequence in all_sequence_prices[i]:
-            bananas += all_sequence_prices[i][sequence]
-    max_bananas = max(max_bananas, bananas)
-
+max_bananas = max(all_sequence_prices.values())
 print(max_bananas)
