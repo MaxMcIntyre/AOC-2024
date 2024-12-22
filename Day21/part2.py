@@ -12,22 +12,17 @@ directional_grid = [[None,"^","A"],["<","v",">"]]
 def find_recursive_paths(path, depth, memo):
     if depth == 25:
         return len(path)
-    
-    if (path, depth) in memo:
+    elif (path, depth) in memo:
         return memo[(path, depth)]
-    
+
     min_length_path = 0
+    for i in range(len(path)):
+        start = "A" if i == 0 else path[i-1]
+        end = path[i]
 
-    if (path, depth) in memo:
-        min_length_path = memo[(path, depth)]
-    else:
-        for i in range(len(path)):
-            start = "A" if i == 0 else path[i-1]
-            end = path[i]
+        min_length_path += min(find_recursive_paths(next_subpath, depth + 1, memo) for next_subpath in calculate_paths(directional_keypad[start], directional_keypad[end], directional_grid))
 
-            min_length_path += min(find_recursive_paths(next_subpath, depth + 1, memo) for next_subpath in calculate_paths(directional_keypad[start], directional_keypad[end], directional_grid))
-
-        memo[(path, depth)] = min_length_path
+    memo[(path, depth)] = min_length_path
     
     return min_length_path
 
