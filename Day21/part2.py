@@ -20,7 +20,7 @@ def find_recursive_paths(path, depth, memo):
         start = "A" if i == 0 else path[i-1]
         end = path[i]
 
-        min_length_path += min(find_recursive_paths(next_subpath, depth + 1, memo) for next_subpath in calculate_paths(directional_keypad[start], directional_keypad[end], directional_grid))
+        min_length_path += min(find_recursive_paths(subpath, depth + 1, memo) for subpath in calculate_paths(directional_keypad[start], directional_keypad[end], directional_grid))
 
     memo[(path, depth)] = min_length_path
     
